@@ -82,7 +82,7 @@ int main()
 
 				default:
 					std::cerr << "INVALID PYRAMID" << std::endl;
-					//goto all_cycles_exit;
+					goto all_cycles_exit;
 				}
 			}
 
