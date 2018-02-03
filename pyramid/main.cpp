@@ -25,10 +25,12 @@ int main()
 
 	std::ofstream out("world.txt");
 
+	bool correction = true;
+
 	int line_pos_a = 0, line_pos_b = 0;
-	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
-		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
-			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+	for (int offset = 0, line_length = 1; offset + 1 <= height && correction; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset && correction; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset && correction; ++line_pos_b)
 			{
 				switch (orientation)
 				{
@@ -82,6 +84,7 @@ int main()
 
 				default:
 					std::cerr << "INVALID PYRAMID" << std::endl;
+					correction = false;
 					//goto all_cycles_exit;
 				}
 			}
