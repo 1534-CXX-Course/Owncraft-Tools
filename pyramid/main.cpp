@@ -8,27 +8,29 @@ int main()
 	setlocale(LC_ALL, "russian");
 
 	int x = 0, y = 0, z = 0;
-	std::cout << "Ââåäèòå êîîðäèíàòû âåðøèíû ïèðàìèäû: ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» Ã¢Ã¥Ã°Ã¸Ã¨Ã­Ã» Ã¯Ã¨Ã°Ã Ã¬Ã¨Ã¤Ã»: ";
 	std::cin >> x >> y >> z;
 	
 	int height = 0;
-	std::cout << "Ââåäèòå âûñîòó ïèðàìèäû: ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¢Ã»Ã±Ã®Ã²Ã³ Ã¯Ã¨Ã°Ã Ã¬Ã¨Ã¤Ã»: ";
 	std::cin >> height;
 
 	std::string block_name;
-	std::cout << "Ââåäèòå èìÿ áëîêà: ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã¨Ã¬Ã¿ Ã¡Ã«Ã®ÃªÃ : ";
 	std::cin >> block_name;
 
 	int orientation = 0;
-	std::cout << "Ââåäèòå îðèåíòàöèþ ïèðàìèäû: ";
+	std::cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã®Ã°Ã¨Ã¥Ã­Ã²Ã Ã¶Ã¨Ã¾ Ã¯Ã¨Ã°Ã Ã¬Ã¨Ã¤Ã»: ";
 	std::cin >> orientation;
 
 	std::ofstream out("world.txt");
 
+	bool correction = true;
+
 	int line_pos_a = 0, line_pos_b = 0;
-	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
-		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
-			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+	for (int offset = 0, line_length = 1; offset + 1 <= height && correction; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset && correction; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset && correction; ++line_pos_b)
 			{
 				switch (orientation)
 				{
@@ -82,11 +84,9 @@ int main()
 
 				default:
 					std::cerr << "INVALID PYRAMID" << std::endl;
-					goto all_cycles_exit;
+					correction = false;
 				}
 			}
-
-all_cycles_exit:
 
 	system("pause");
 	return 0;
