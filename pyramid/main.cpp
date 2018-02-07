@@ -8,19 +8,19 @@ int main()
 	setlocale(LC_ALL, "russian");
 
 	int x = 0, y = 0, z = 0;
-	std::cout << "Ââåäèòå êîîðäèíàòû âåðøèíû ïèðàìèäû: ";
+	std::cout << "Введите координаты вершины пирамиды: : ";
 	std::cin >> x >> y >> z;
 	
 	int height = 0;
-	std::cout << "Ââåäèòå âûñîòó ïèðàìèäû: ";
+	std::cout << "Введите высоту пирамиды: ";
 	std::cin >> height;
 
 	std::string block_name;
-	std::cout << "Ââåäèòå èìÿ áëîêà: ";
+	std::cout << "Введите имя блока: ";
 	std::cin >> block_name;
 
 	int orientation = 0;
-	std::cout << "Ââåäèòå îðèåíòàöèþ ïèðàìèäû: ";
+	std::cout << "Введите ориентацию пирамиды: ";
 	std::cin >> orientation;
 
 	std::ofstream out("world.txt");
