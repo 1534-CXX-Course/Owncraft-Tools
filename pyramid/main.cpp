@@ -3,6 +3,10 @@
 #include <locale>
 #include <cassert>
 
+#include "pyramid.h"
+
+
+
 int main()
 {
 	setlocale(LC_ALL, "russian");
@@ -25,69 +29,174 @@ int main()
 
 	std::ofstream out("world.txt");
 
-	bool correction = true;
+	
+			
+	switch (orientation)
+	{
+	case UP:
+		up_pyramid(x, y, z, height, block_name, out);
+		break;
 
-	int line_pos_a = 0, line_pos_b = 0;
-	for (int offset = 0, line_length = 1; offset + 1 <= height && correction; ++offset, line_length += 2)
-		for (line_pos_a = -offset; line_pos_a <= offset && correction; ++line_pos_a)
-			for (line_pos_b = -offset; line_pos_b <= offset && correction; ++line_pos_b)
-			{
-				switch (orientation)
-				{
-				case 0:
-					out << x + line_pos_a
-						<< " " << y + line_pos_b
-						<< " " << z + -offset
-						<< " " << block_name
-						<< std::endl;
-					break;
+	case DOWN:
+		down_pyramid(x, y, z, height, block_name, out);
+		break;
 
-				case 1:
-					out << x + line_pos_a
-						<< " " << y + line_pos_b
-						<< " " << z + -offset
-						<< " " << block_name
-						<< std::endl;
-					break;
+	case RIGHT:	
+		right_pyramid(x, y, z, height, block_name, out);
+		break;
 
-				case 2:
-					out << x - offset
-						<< " " << y + line_pos_b
-						<< " " << z + line_pos_a
-						<< " " << block_name
-						<< std::endl;
-					break;
+	case LEFT:	
+		left_pyramid(x, y, z, height, block_name, out);
+		break;
 
-				case 3:
-					out << x + offset
-						<< " " << y + line_pos_b
-						<< " " << z + line_pos_a
-						<< " " << block_name
-						<< std::endl;
-					break;
+	case FORWARD:	
+		forward_pyramid(x, y, z, height, block_name, out);
+		break;
 
-				case 4:
-					out << x + line_pos_b
-						<< " " << y + offset
-						<< " " << z + line_pos_a
-						<< " " << block_name
-						<< std::endl;
-					break;
+	case BACKWARD:	
+		backward_pyramid(x, y, z, height, block_name, out);
+		break;
 
-				case 5:
-					out << x + line_pos_b
-						<< " " << y - offset
-						<< " " << z + line_pos_a
-						<< " " << block_name
-						<< std::endl;
-					break;
-
-				default:
-					std::cerr << "INVALID PYRAMID" << std::endl;
-					correction = false;
-				}
-			}
+	default:
+		std::cerr << "INVALID PYRAMID" << std::endl;
+	}
+			
 
 	system("pause");
 	return 0;
+}
+
+void up_pyramid(int x, int y, int z, int height, std::string block_name, std::ofstream &out)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x + line_pos_a
+					<< " " << y + line_pos_b
+					<< " " << z + -offset
+					<< " " << block_name
+					<< std::endl;
+			}
+}
+void down_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x + line_pos_a
+					<< " " << y + line_pos_b
+					<< " " << z + offset
+					<< " " << block_name
+					<< std::endl;
+			}
+}
+
+void right_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x - offset
+					<< " " << y + line_pos_b
+					<< " " << z + line_pos_a
+					<< " " << block_name
+					<< std::endl;
+			}
+}
+
+void left_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x + offset
+					<< " " << y + line_pos_b
+					<< " " << z + line_pos_a
+					<< " " << block_name
+					<< std::endl;
+			}
+}
+
+void forward_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x + line_pos_b
+					<< " " << y + offset
+					<< " " << z + line_pos_a
+					<< " " << block_name
+					<< std::endl;
+			}
+}
+
+void backward_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+)
+{
+	assert(height > 0);
+	int line_pos_a = 0, line_pos_b = 0;
+	for (int offset = 0, line_length = 1; offset + 1 <= height; ++offset, line_length += 2)
+		for (line_pos_a = -offset; line_pos_a <= offset; ++line_pos_a)
+			for (line_pos_b = -offset; line_pos_b <= offset; ++line_pos_b)
+			{
+				out << x + line_pos_b
+					<< " " << y - offset
+					<< " " << z + line_pos_a
+					<< " " << block_name
+					<< std::endl;
+			}
 }
