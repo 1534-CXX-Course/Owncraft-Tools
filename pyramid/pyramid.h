@@ -13,6 +13,28 @@ enum Orientation // Перечисление
 	BACKWARD
 };
 
+void pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	Orientation,
+	std::ofstream &out
+);
+
+
+void up_pyramid
+(
+	int x,
+	int y,
+	int z,
+	int height,
+	std::string block_name,
+	std::ofstream &out
+);
+
 void up_pyramid
 (
 	int x,
