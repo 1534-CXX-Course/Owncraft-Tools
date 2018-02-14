@@ -10,19 +10,19 @@ int main()
 	setlocale(LC_ALL, "russian");
 
 	int x = 0, y = 0, z = 0;
-	std::cout << "Введите координаты вершины пирамиды: : ";
+	std::cout << "Pyramid vertex: : ";
 	std::cin >> x >> y >> z;
 	
 	int height = 0;
-	std::cout << "Введите высоту пирамиды: ";
+	std::cout << "Pyramid height: ";
 	std::cin >> height;
 
 	std::string block_name;
-	std::cout << "Введите имя блока: ";
+	std::cout << "Block name: ";
 	std::cin >> block_name;
 
 	int orientation = 0;
-	std::cout << "Введите ориентацию пирамиды: ";
+	std::cout << "Pyramid orientation: ";
 	std::cin >> orientation;
 
 	std::ofstream out("world.txt");
